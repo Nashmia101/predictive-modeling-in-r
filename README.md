@@ -1,45 +1,53 @@
-# predictive-modeling-in-r
-Built predictive models in R using regression, decision trees, logistic regression, and k-NN to analyse real-world datasets (concrete strength, heart disease, mass spectrometry) with cross-validation and bootstrap inference
+# Predictive Modelling in R
+
+Built predictive models in R using regression, decision trees, logistic regression, and k-NN to analyse real-world datasets (concrete strength, heart disease, mass spectrometry), applying cross-validation and bootstrap inference throughout for model evaluation and confidence estimation.
+
 ---
 
 ## Overview
-This project demonstrates practical skills in statistical modelling, predictive analytics, and machine learning.  
-The work is divided into three main parts:
+
+This project demonstrates practical skills in statistical modelling, predictive analytics, and machine learning, divided into three parts.
 
 ### 1. Concrete Strength Prediction (Regression)
-- Built a **multiple linear regression model** to predict compressive strength from mixture components.  
-- Applied **Bonferroni correction** for statistical significance testing.  
-- Used **stepwise selection with BIC** to identify the best subset of predictors.  
-- Predicted compressive strength for a new concrete mix and compared it to the existing industry standard.  
+
+- Built a **multiple linear regression model** to predict compressive strength from mixture components (cement, blast furnace slag, fly ash, water, superplasticizer, coarse/fine aggregate, age)
+- Applied a **Bonferroni correction** (α/8) for statistical significance testing across predictors
+- Used **stepwise selection with BIC** (`step()` with `k = log(n)`) to identify the optimal subset of predictors
+- Predicted compressive strength for a new concrete mix using the pruned model, with a 95% confidence interval
 
 ### 2. Heart Disease Prediction (Classification)
-- Fitted a **decision tree** using cross-validation to identify key predictors of heart disease.  
-- Built a **logistic regression model with stepwise selection (BIC)**.  
-- Compared both models on test data using **custom prediction statistics**.  
-- Calculated patient-specific odds and used **bootstrap confidence intervals** to assess differences between individuals.  
+
+- Fitted a **decision tree** using 10-fold cross-validation to identify key predictors of heart disease
+- Built a **logistic regression model** with stepwise selection (BIC) for comparison
+- Evaluated both models on held-out test data using custom prediction statistics
+- Calculated patient-specific odds for individual test cases and used **bootstrap confidence intervals** (BCa method, 5,000 resamples) to assess differences in predicted risk between individuals
 
 ### 3. Mass Spectrometry Data Smoothing (k-NN)
-- Implemented **k-nearest neighbours (k-NN)** regression to smooth noisy mass spectrometry data.  
-- Measured performance with **mean squared error (MSE)** and selected optimal `k` via cross-validation.  
-- Evaluated trade-offs between background noise smoothing and accurate peak detection.  
-- Applied **bootstrap resampling** to estimate confidence intervals for predicted intensities.  
+
+- Implemented **k-nearest neighbours (k-NN)** regression (optimal kernel) to smooth noisy mass spectrometry intensity data against MZ (mass-to-charge ratio)
+- Measured performance via **mean squared error (MSE)** across k = 1 to 25, and selected the optimal k using `train.kknn` cross-validation
+- Visualised smoothing behaviour at k = 2, 6, 12, and 25 to evaluate the trade-off between noise suppression and peak detection accuracy
+- Applied **bootstrap resampling** (5,000 resamples, BCa confidence intervals) at multiple k values to estimate confidence intervals around the predicted peak intensity
 
 ---
 
-## Results
-- Delivered **interpretable and accurate predictive models** across regression, classification, and smoothing tasks.  
-- Logistic regression proved more reliable than decision trees for heart disease prediction.  
-- k-NN successfully smoothed noisy mass spectrometry signals, with `k` choice critical to balancing accuracy vs. noise.  
-- Applied **bootstrap methods** to provide statistical confidence in model predictions.  
+## Tools & Techniques
+
+- **Language:** R
+- **Libraries:** `glmnet`, `rpart`, `randomForest`, `kknn`, `boot`
+- **Techniques:** Multiple linear regression, Bonferroni correction, stepwise BIC selection, decision trees, logistic regression, k-fold cross-validation, k-NN regression, bootstrap resampling (BCa intervals)
+- **Applications:** Materials science (concrete strength), medical diagnostics (heart disease), signal processing (mass spectrometry)
 
 ---
 
-## Skills & Tools
-- **Languages & Libraries:** R, glm, rpart, randomForest, glmnet, kknn, boot  
-- **Techniques:** Regression, Classification, Decision Trees, Logistic Regression, Cross-Validation, Stepwise Selection, k-NN, Bootstrapping  
-- **Applications:** Predictive modelling, medical diagnostics, materials science, signal smoothing  
+## Files
+
+- `R_script_question_1.R` — concrete strength regression analysis
+- `R_script_question_2.R` — heart disease classification (decision tree vs. logistic regression)
+- `question_3_R_script.R` — mass spectrometry k-NN smoothing and bootstrap intervals
 
 ---
 
 ## Author
-**Nashmia Shakeel**  
+
+Nashmia Shakeel
